@@ -4,15 +4,15 @@ public static class Program // Class extensions need to hail from static classes
 {
     static void Main(string[] args)
     {
-        string first_name = GetName().Capitalize();
-        string last_name = GetName("last").Capitalize();
+        string firstName = GetName().Capitalize();
+        string lastName = GetName("last").Capitalize();
 
-        Console.WriteLine($"\nYour name is {last_name}, {first_name} {last_name}.");
+        Console.WriteLine($"\nYour name is {lastName}, {firstName} {lastName}.");
     }
 
-    static string GetName(string name_type = "first")
+    static string GetName(string nameType = "first")
     {
-        Console.Write($"What is your {name_type} name? ");
+        Console.Write($"What is your {nameType} name? ");
         string name = Console.ReadLine();
 
         return name;
@@ -20,10 +20,10 @@ public static class Program // Class extensions need to hail from static classes
 
     public static string Capitalize(this string input) // The 'this' keyword makes this an extension method and lets it be called on all strings
     {
-        char proper_first_letter = input[0].ToString().ToUpper()[0]; 
+        char properFirstLetter = input[0].ToString().ToUpper()[0]; 
         // The [0] seems redundant since the string is only 1 character long, but it's necessary to convert the string to a char
         
-        return proper_first_letter + input[1..];
+        return properFirstLetter + input[1..];
     }
 
     // Something interesting to note is that when C# is compiled, it reviews the code 2 times. The first time to define symbols
