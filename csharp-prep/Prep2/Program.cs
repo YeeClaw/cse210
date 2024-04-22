@@ -4,15 +4,11 @@ class Program
 {
     static void Main(string[] args)
     {
-        while (true)
-        {
-            int currentGrade = GetGrade();
-            string currentLetterGrade = GetLetterGrade(currentGrade);
-            string prefix = GetPrefix(currentGrade);
+        int currentGrade = GetGrade();
+        string currentLetterGrade = GetLetterGrade(currentGrade);
+        string prefix = GetPrefix(currentGrade);
 
-            Console.WriteLine($"\nYour grade is a/an {currentLetterGrade}{prefix}.");
-        }
-        
+        Console.WriteLine($"\nYour grade is a/an {currentLetterGrade}{prefix}.");
     }
 
     static int GetGrade()
