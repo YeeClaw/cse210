@@ -1,13 +1,15 @@
-class Program
+public class Program
 {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
-        Reference verse = new("Alma",41, 10);
+        MathAssignment mathHomework = new("Roberto Rodriguez", "Fractions", "7.3", "8-19");
+        WritingAssignment writingAssignment = 
+            new("Mary Walters", "European History", "The Causes of World War II by Mary Waters");
 
-        string scriptureText = "Do not suppose, because it has been spoken concerning restoration, that ye shall be restored from sin to happiness. Behold, I say unto you, wickedness never was happiness.";
-        Scripture myScripture = new(verse, scriptureText);
-
+        Console.WriteLine(mathHomework.GetSummary());
+        Console.WriteLine($"{mathHomework.GetHomeworkList()}\n");
         
-        myScripture.Display();
+        Console.WriteLine(writingAssignment.GetSummary());
+        Console.WriteLine($"{writingAssignment.GetWritingInformation()}\n");
     }
 }
