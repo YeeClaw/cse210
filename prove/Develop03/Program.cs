@@ -1,5 +1,12 @@
 class Program
 {
+    /*
+     This program creates a simple scripture memory game. The user can either enter their own scripture or use a default one.
+     For showing creativity, the user has the option of entering their own scripture information. The system is robust and can
+     handle a variety of inputs. The user can also choose how many words they want to hide per round. The game will continue
+     until the user types 'quit' or the scripture is completely hidden. The user can also choose to quit after the scripture
+    */
+    
     static void Main(string[] args)
     {
         string input;
@@ -68,13 +75,13 @@ class Program
         // It seems that in this class we make a lot of game loops. Maybe in the future I'll make a class for that in my free time.
         // It would also be smart to make this whole thing generic so that it can be used for any type of memory game.
         
-        var lastCall = 0;
+        var lastCall = false;
         
         do
         {
             if (myScripture.IsCompletelyHidden())
             {
-                lastCall++;
+                lastCall = true;
             }
             
             Console.WriteLine(myScripture.GetDisplayText() + "\n");
@@ -84,6 +91,6 @@ class Program
             
             myScripture.HideRandomWords(wordsToHide);
             Console.Clear();
-        } while (input?.ToLower() != "quit" && lastCall < 1);
+        } while (input?.ToLower() != "quit" && !lastCall);
     }
 }
