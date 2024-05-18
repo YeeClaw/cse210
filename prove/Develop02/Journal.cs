@@ -1,9 +1,9 @@
-public class Journal(string owner, string pathFile)
+public class Journal
 {
     private int _choice;
     
-    public string Owner { get; } = owner;
-    private string PathFile { get; } = pathFile;
+    public string Owner { get; }
+    private string PathFile { get; }
     private List<Entry> Entries { get; } = new();
     public int Choice
     {
@@ -14,6 +14,12 @@ public class Journal(string owner, string pathFile)
                 throw new ArgumentException("Invalid choice");
             _choice = value;
         }
+    }
+    
+    public Journal(string owner, string pathFile)
+    {
+        Owner = owner;
+        PathFile = pathFile;
     }
 
     public void DisplayMenu()
