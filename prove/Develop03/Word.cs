@@ -8,13 +8,8 @@ public class Word
         _word = word;
         _isHidden = false;
     }
-
-    public bool IsHidden()
-    {
-        return _isHidden;
-    }
     
-    public string Hidden()
+    private string Hidden()
     {
         char[] hidden = new char[_word.Length];
         for (int i = 0; i < _word.Length; i++) // How is it implied that `i` is an integer???
@@ -22,6 +17,11 @@ public class Word
             hidden[i] = '_';
         }
         return string.Join("", hidden);
+    }
+    
+    public bool IsHidden()
+    {
+        return _isHidden;
     }
 
     public override string ToString()
@@ -42,7 +42,7 @@ public class Word
         _isHidden = true;
     }
     
-    public void Reveal()
+    public void Reveal() // Depricated
     {
         _isHidden = false;
     }
