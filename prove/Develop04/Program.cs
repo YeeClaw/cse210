@@ -1,6 +1,6 @@
 class Program
 {
-    /*===[MINEFULLNESS ACTIVITIES]===*/
+    /*===[MINDFULLNESS ACTIVITIES]===*/
     // The following classes meet and exceed the initial requirements for the assignment.
     // I can't even begin to describe everything I did that was "showing creativity". I spent way too much time on this.
     // This biggest thing that I would like to highlight is my TextAnimation class that was written in the Sandbox namespace
