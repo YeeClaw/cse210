@@ -1,15 +1,12 @@
 public class ReflectingActivity : Activity
 {
-    public string[] Prompts { get; set; }
     public string[] Questions { get; set; }
     
-    private Random _randGen = new();
     private List<int> _chosenQuestions;
     private int _secondsPerQuestion;
     
     public ReflectingActivity(string name, string description) : base(name, description)
     {
-        Prompts = File.ReadAllText("../../../prompts.txt").Replace("\n", "").Replace("\r", "").Split("&");
         Questions = File.ReadAllText("../../../questions.txt").Replace("\n", "").Replace("\r", "").Split("&");
 
         _secondsPerQuestion = 10;
@@ -26,14 +23,15 @@ public class ReflectingActivity : Activity
 
     public async Task Run()
     {
-        DisplayStartingMessage();
+        while (Duration == 0){DisplayStartingMessage();} // Band-aid fix :(
 
         await StartSession();
         
+        if (IsCursorOutOfBounds()) {Console.Clear();}
         await DisplayEndingMessage();
     }
 
-    public async Task StartSession()
+    private async Task StartSession()
     {
         Console.Clear();
         Console.WriteLine("Get ready...");
@@ -42,20 +40,15 @@ public class ReflectingActivity : Activity
         await DisplayPrompt();
         await DisplayQuestions();
     }
-
-    public string GetRandomPrompt()
-    {
-        return Prompts[_randGen.Next(Prompts.Length)];
-    }
     
-    public void PopulateRandomQuestions()
+    private void PopulateRandomQuestions()
     {
         _chosenQuestions.Clear();
         if (Duration <= Questions.Length * _secondsPerQuestion)
         {
             for (var i = 0; i < (Duration / _secondsPerQuestion); i++)
             {
-                int index = _randGen.Next(Questions.Length);
+                int index = RandGen.Next(Questions.Length);
                 if (_chosenQuestions.Contains(index))
                 {
                     i--;
@@ -68,7 +61,7 @@ public class ReflectingActivity : Activity
         {
             for (var i = 0; i < (Questions.Length); i++)
             {
-                int index = _randGen.Next(Questions.Length);
+                int index = RandGen.Next(Questions.Length);
                 if (_chosenQuestions.Contains(index))
                 {
                     i--;
@@ -79,10 +72,10 @@ public class ReflectingActivity : Activity
         }
     }
     
-    public async Task DisplayPrompt()
+    private async Task DisplayPrompt()
     {
         Console.WriteLine("\nConsider the following prompt:");
-        Console.WriteLine($"--- {GetRandomPrompt()} ---");
+        Console.WriteLine($"--- {GetRandomPrompt("../../../prompts.txt")} ---");
 
         Console.WriteLine("\nWhen you have something in mind, press enter to continue");
         Console.ReadLine();
@@ -93,7 +86,7 @@ public class ReflectingActivity : Activity
         Console.Clear();
     }
 
-    public async Task DisplayQuestions()
+    private async Task DisplayQuestions()
     {
         PopulateRandomQuestions();
         

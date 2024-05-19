@@ -9,7 +9,7 @@ public class BreathingActivity : Activity
 
     public async Task Run()
     {
-        DisplayStartingMessage();
+        while (Duration == 0){DisplayStartingMessage();} // Band-aid fix :(
         Console.Clear();
 
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -20,6 +20,7 @@ public class BreathingActivity : Activity
         
         await StartSession();
         
+        if (IsCursorOutOfBounds()) {Console.Clear();}
         await DisplayEndingMessage();
     }
 
@@ -29,17 +30,15 @@ public class BreathingActivity : Activity
         
         string[] frames = File.ReadAllText("../../../frames.txt").Split("&");
         TextAnimation breathingIn = new(1, frames);
-        TextAnimation breathingOut = new(2, frames);
+        TextAnimation breathingOut = new(1, frames);
 
         while (DateTime.Now < sessionEndTime)
         {
-            if (IsCursorOutOfBounds())
-            {
-                Console.Clear();
-            }
+            if (IsCursorOutOfBounds()) {Console.Clear();}
             Console.WriteLine("\nBreathe in...");
             await breathingIn.Play();
-            Console.WriteLine("Now breathing out...");
+            if (IsCursorOutOfBounds()) {Console.Clear();}
+            Console.WriteLine("Now breathe out...");
             await breathingOut.ReversePlay();
         }
     }

@@ -11,16 +11,18 @@ public class Activity
         {
             if (value < 10)
             {
+                Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Duration must be at least 10 seconds. Please try again.\n");
                 Console.ResetColor();
-                Console.ReadLine();
-                DisplayStartingMessage();
             }
-
-            _duration = value;
+            else
+            {
+                _duration = value;
+            }
         }
     }
+    public Random RandGen { get; set; }
     
     private int _duration;
 
@@ -28,11 +30,11 @@ public class Activity
     {
         Name = name;
         Description = description;
+        RandGen = new Random();
     }
 
     public void DisplayStartingMessage()
     {
-        Console.Clear();
         Console.WriteLine($"Welcome to the {Name} Activity!\n");
         Console.WriteLine(Description + "\n");
 
@@ -46,8 +48,10 @@ public class Activity
             Console.ResetColor();
             DisplayStartingMessage();
         }
-        
-        Duration = duration;
+        else
+        {
+            Duration = duration;
+        }
     }
     
     public async Task DisplayEndingMessage()
@@ -81,5 +85,11 @@ public class Activity
             return true;
         }
         return false;
+    }
+
+    public string GetRandomPrompt(string promptFilePath)
+    {
+        string[] allPrompts = File.ReadAllText(promptFilePath).Replace("\n", "").Replace("\r", "").Split("&");
+        return allPrompts[RandGen.Next(allPrompts.Length)];
     }
 }
