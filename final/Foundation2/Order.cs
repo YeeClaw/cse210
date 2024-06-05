@@ -1,3 +1,5 @@
+namespace Foundation2;
+
 using System.Text;
 
 public class Order

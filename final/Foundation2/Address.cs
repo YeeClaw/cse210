@@ -1,3 +1,5 @@
+namespace Foundation2;
+
 public class Address
 {
     public string Street { get; set; }
@@ -16,6 +18,11 @@ public class Address
     public override string ToString()
     {
         return $"{Street}\n{City}, {State}\n{Country}";
+    }
+    
+    public string ToInlineString()
+    {
+        return $"{Street}, {City}, {State}, {Country}";
     }
 
     public bool IsUsa()

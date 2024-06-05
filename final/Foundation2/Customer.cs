@@ -1,3 +1,5 @@
+namespace Foundation2;
+
 public class Customer
 {
     public string FirstName { get; set; }
