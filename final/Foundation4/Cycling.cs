@@ -6,6 +6,6 @@ public class Cycling : Activity
         : base(date, duration)
     {
         Speed = speed;
-        Distance = speed * (duration / 60f);
+        Distance = CalculateDistance();
     }
 }

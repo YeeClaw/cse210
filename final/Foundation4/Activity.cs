@@ -18,4 +18,14 @@ public class Activity
     {
         return $"{Date.ToString("dd MMM yyyy")} ({this.GetType().Name}) ({Duration} min): Distance {Distance} km, Speed: {Speed} kph, Pace: {Pace} min/km";
     }
+
+    public virtual float CalculateDistance()
+    {
+        return Speed * (Duration / 60f);
+    }
+    
+    public virtual float CalculateSpeed()
+    {
+        return Distance / (Duration / 60f);
+    }
 }
